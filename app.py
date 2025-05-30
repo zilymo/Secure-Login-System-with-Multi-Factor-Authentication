@@ -20,7 +20,7 @@ def check_password(password, hashed):
 
 # Example usage
 if __name__ == "__main__":
-    password = "mysecretpassword"
+    password1 = "mysecretpassword"
     
     # Step 1: Hash the password
     hashed = hash_password(password)
@@ -57,6 +57,6 @@ def check_password_strength(password):
     return "It is a good password!"
 
 # User input
-user_password = input("Enter your password: ")
+password1 = input("Enter your password: ")
 result = check_password_strength(user_password)
 print(result)
