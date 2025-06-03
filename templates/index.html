@@ -2,74 +2,124 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Simple Login</title>
-  <link rel="stylesheet" href="style.css">
+  <title>User Registration</title>
   <style>
     body {
-  font-family: Arial, sans-serif;
-  background-color: #f0f2f5;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  margin: 0;
-}
+      font-family: Arial, sans-serif;
+      background-color: #f0f2f5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
 
-.login-container {
-  background: white;
-  padding: 30px 40px;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
-  width: 300px;
-}
+    .login-container {
+      background: white;
+      padding: 30px 40px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      width: 320px;
+    }
 
-h2 {
-  margin-bottom: 20px;
-  text-align: center;
-}
+    h2 {
+      margin-bottom: 20px;
+      text-align: center;
+    }
 
-label {
-  display: block;
-  margin-bottom: 6px;
-  font-weight: bold;
-}
+    label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: bold;
+    }
 
-input {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 15px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
+    .input-group {
+      position: relative;
+      margin-bottom: 15px;
+    }
 
-button {
-  width: 100%;
-  padding: 10px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
+    .input-group input {
+      width: 100%;
+      padding: 10px 40px 10px 10px; /* space for eye */
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
 
-button:hover {
-  background-color: #0056b3;
-}
+    .input-group .eye-icon {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: pointer;
+      font-size: 18px;
+      color: #777;
+    }
 
+    button {
+      width: 100%;
+      padding: 10px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    .flash-messages {
+      background-color: #ffe0e0;
+      border: 1px solid #ff0000;
+      color: #d8000c;
+      padding: 10px;
+      margin-bottom: 15px;
+      border-radius: 4px;
+    }
   </style>
 </head>
 <body>
   <div class="login-container">
-    <h2>Login</h2>
-    <form method="get" action="">
+    <h2>Register</h2>
+
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <div class="flash-messages">
+          <ul>
+          {% for message in messages %}
+            <li>{{ message }}</li>
+          {% endfor %}
+          </ul>
+        </div>
+      {% endif %}
+    {% endwith %}
+
+    <form method="POST">
       <label for="username">Username</label>
-      <input type="text" id="username" name="username" required>
+      <div class="input-group"  style="padding: 20px;">
+        <input type="text" id="username" name="username" required >
+      </div>
 
       <label for="password">Password</label>
-      <input type="password" id="password" name="password" required>
+      <div class="input-group" style="padding: 20px;">
+        <input type="password" id="password" name="password" required>
+        <span class="eye-icon" onclick="togglePassword()">👁️</span>
+      </div>
 
-      <button type="submit">Login</button>
+      <button type="submit">Register</button>
     </form>
   </div>
+
+  <script>
+    function togglePassword() {
+      const passwordInput = document.getElementById("password");
+      const eyeIcon = document.querySelector(".eye-icon");
+      const isPassword = passwordInput.type === "password";
+
+      passwordInput.type = isPassword ? "text" : "password";
+      eyeIcon.textContent = isPassword ? "🙈" : "👁️"; // optional toggle
+    }
+  </script>
 </body>
 </html>
