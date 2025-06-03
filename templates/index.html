@@ -1,125 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>User Registration</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f0f2f5;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      margin: 0;
-    }
-
-    .login-container {
-      background: white;
-      padding: 30px 40px;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-      width: 320px;
-    }
-
-    h2 {
-      margin-bottom: 20px;
-      text-align: center;
-    }
-
-    label {
-      display: block;
-      margin-bottom: 6px;
-      font-weight: bold;
-    }
-
-    .input-group {
-      position: relative;
-      margin-bottom: 15px;
-    }
-
-    .input-group input {
-      width: 100%;
-      padding: 10px 40px 10px 10px; /* space for eye */
-      border: 1px solid #ccc;
-      border-radius: 4px;
-    }
-
-    .input-group .eye-icon {
-      position: absolute;
-      right: 10px;
-      top: 50%;
-      transform: translateY(-50%);
-      cursor: pointer;
-      font-size: 18px;
-      color: #777;
-    }
-
-    button {
-      width: 100%;
-      padding: 10px;
-      background-color: #007bff;
-      color: white;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-    }
-
-    button:hover {
-      background-color: #0056b3;
-    }
-
-    .flash-messages {
-      background-color: #ffe0e0;
-      border: 1px solid #ff0000;
-      color: #d8000c;
-      padding: 10px;
-      margin-bottom: 15px;
-      border-radius: 4px;
-    }
-  </style>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Netflix</title>
+      <link rel="icon" href="/static/images/netflixtoptoplogo.jpeg">
+      <link rel="stylesheet" href="/static/malito.css">
 </head>
-<body>
-  <div class="login-container">
-    <h2>Register</h2>
-
-    {% with messages = get_flashed_messages() %}
-      {% if messages %}
-        <div class="flash-messages">
-          <ul>
-          {% for message in messages %}
-            <li>{{ message }}</li>
-          {% endfor %}
-          </ul>
-        </div>
-      {% endif %}
-    {% endwith %}
-
-    <form method="POST">
-      <label for="username">Username</label>
-      <div class="input-group"  style="padding: 20px;">
-        <input type="text" id="username" name="username" required >
+<bo
+   <div class="header">
+      <nav>
+          <img src="/static/images/netflix-logo 2.png" alt="logo" class="logo"> 
+          <div>
+               <button class="language">English</button>
+               <button><a href="new.html">Sign In</a></button>
+          </div> 
+      </nav>
+      <div class="header-content">
+            <h1>Unlimited movies, TV shows and more.</h1>
+            <h3>Watch anywhere. Cancel anytime.</h3>
+            <p>Ready to watch? Enter your email to create or restart your membership.</p>
+            <form action="" class="email-signup">
+                  <input type="email" placeholder="Email address" required>
+                  <button type="submit" name="email">Get Started</button>
+            </form>
       </div>
-
-      <label for="password">Password</label>
-      <div class="input-group" style="padding: 20px;">
-        <input type="password" id="password" name="password" required>
-        <span class="eye-icon" onclick="togglePassword()">👁️</span>
-      </div>
-
-      <button type="submit">Register</button>
-    </form>
-  </div>
-
-  <script>
-    function togglePassword() {
-      const passwordInput = document.getElementById("password");
-      const eyeIcon = document.querySelector(".eye-icon");
-      const isPassword = passwordInput.type === "password";
-
-      passwordInput.type = isPassword ? "text" : "password";
-      eyeIcon.textContent = isPassword ? "🙈" : "👁️"; // optional toggle
-    }
-  </script>
+   </div>
 </body>
 </html>
