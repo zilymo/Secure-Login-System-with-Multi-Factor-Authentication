@@ -1,50 +1,143 @@
- body {
-  font-family: Arial, sans-serif;
-  background-color: #f0f2f5;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  margin: 0;
-}
-
-.login-container {
-  background: white;
-  padding: 30px 40px;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
-  width: 300px;
-}
-
-h2 {
-  margin-bottom: 20px;
-  text-align: center;
-}
-
-label {
-  display: block;
-  margin-bottom: 6px;
-  font-weight: bold;
-}
-
-input {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 15px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-
-button {
-  width: 100%;
-  padding: 10px;
-  background-color: #007bff;
+body{
+  background: black;
   color: white;
-  border: none;
-  border-radius: 4px;
+}
+.header{
+ width: 84%;
+ height: 100vh;
+ background-image: linear-gradient(rgba(0,0,0,0.7),rgba(0,0,0,0.7)),url(images/netflix-background.jpg);
+ background-size: cover;
+ background-position: center;
+ padding: 10px 8%;
+ position: relative;
+}
+nav{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 0;
+}
+.logo{
+  width: 150px;
   cursor: pointer;
 }
-
-button:hover {
-  background-color: #0056b3;
+nav button{
+  border: 0;
+  outline: 0;
+  background: #db0001;
+  color: #fff;
+  padding: 7px 20px;
+  font-size: 12px;
+  border-radius: 6px;
+  margin-left: 10px;
+  cursor: pointer;
+}
+.language{
+  display: inline-flex;
+  align-items: center;
+  background: transparent;
+  border: 1px solid white;
+}
+.header-content{
+  position: absolute;
+  top: 20%;
+  left: 28%;
+  text-align: center;
+} 
+.header-content h1{
+  font-size: 60px;
+  font-weight: 600;
+  max-width: 650px;
+}
+.header-content h3{
+  font-weight: 400;
+  margin-bottom: 20px;
+  font-size: 30px;
+}
+.email-signup{
+  background: white;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  margin-top: 30px;
+  overflow: hidden;
+}
+.email-signup input{
+  flex: 1;
+  border: 0;
+  outline: 0;
+  margin-left: 20px;
+}
+.email-signup button{
+  background: #db0001;
+  border: 0;
+  outline: 0;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  padding: 15px 30px;
+}
+a{
+  text-decoration: none;
+  color: white ;
+}
+.kuingia{
+  position: absolute;
+  margin-left: 25%;
+  width: 440px;
+  height: 590px;
+  background: linear-gradient(rgba(0,0,0,0.7));
+}
+.kuingia h1{
+  color: white;
+  margin-top: 60px;
+  margin-left: 50px;
+}
+.kuingia input{
+  margin-left: 50px;
+  margin-top: 20px;
+  width: 320px;
+  height: 47px;
+  background-color: #333;
+  border-radius: 4px;
+  border: none;
+  font-size: 20px;
+}
+.kuingia input::placeholder{
+  font-size: 17px;
+  margin-left: 15px;
+  padding: 12px;
+}
+.kuingia input[type=submit]{
+  width: 320px;
+  height: 45px;
+  background-color: #db0001;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 40px;
+}
+.kuingia input[type=checkbox]{
+  width: 25px;
+  height: 18px;
+  border-radius: 5px;
+}
+.kuingia label{
+  color: rgb(125, 119, 119);
+}
+.kuingia form a{
+  float: right;
+  margin-top: 24px;
+  margin-right: 64px;
+  color: rgb(125, 119, 119);
+  text-decoration: none;
+}
+.contente{
+  position: absolute;
+  margin-top: 80px;
+  font-size: 9px;
+  margin-left: 55px;
+}
+.contente h2{
+  color:  rgb(125, 119, 119);;
 }
