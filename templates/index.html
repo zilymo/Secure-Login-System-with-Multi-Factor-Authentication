@@ -4,25 +4,26 @@
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <title>Netflix</title>
-      <link rel="icon" href="/static/images/netflixtoptoplogo.jpeg">
-      <link rel="stylesheet" href="/static/malito.css">
+      <link rel="icon" href="{{ url_for('static', filename='images/netflixtoptoplogo.jpeg') }}">
+      <link rel="stylesheet" href="{{ url_for('static', filename='malito.css') }}">
 </head>
-<bo
+<body>
    <div class="header">
       <nav>
-          <img src="/static/images/netflix-logo 2.png" alt="logo" class="logo"> 
+          <img src="{{ url_for('static', filename='images/netflix-logo 2.png') }}" alt="logo" class="logo"> 
           <div>
                <button class="language">English</button>
-               <button><a href="new.html">Sign In</a></button>
+               <!-- Link to Flask's register route -->
+               <button><a href="{{ url_for('register') }}" style="text-decoration: none; color: white;">Sign In</a></button>
           </div> 
       </nav>
       <div class="header-content">
             <h1>Unlimited movies, TV shows and more.</h1>
             <h3>Watch anywhere. Cancel anytime.</h3>
             <p>Ready to watch? Enter your email to create or restart your membership.</p>
-            <form action="" class="email-signup">
-                  <input type="email" placeholder="Email address" required>
-                  <button type="submit" name="email">Get Started</button>
+            <form method="POST" class="email-signup">
+                  <input type="email" name="email" placeholder="Email address" required>
+                  <button type="submit">Get Started</button>
             </form>
       </div>
    </div>

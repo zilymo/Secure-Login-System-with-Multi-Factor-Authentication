@@ -1,32 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>Netflix</title>
-      <link rel="stylesheet" href="/static/malito.css">
-      <link rel="icon" href="/static/images/netflixtoptoplogo.jpeg">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Netflix Sign In</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='malito.css') }}">
+  <link rel="icon" href="{{ url_for('static', filename='images/netflixtoptoplogo.jpeg') }}">
 </head>
 <body>
-      <div class="header">
-            <nav>
-                <img src="/static/images/netflix-logo 2.png" alt="logo" class="logo"> 
-            </nav> 
-            <div class="kuingia">
-                  <h1>Sign In</h1>
-                  <form action="">
-                        <input type="email" placeholder="Email or Phone Number">
-                        <input type="password" placeholder="Password">
-                        <input type="submit" value="Sign In">
-                        <input type="checkbox" name="checkbox" id="checkbox">
-                        <label for="checkbox">Remember Me</label>
-                        <a href="">Need Help?</a>
-                  </form>
-                  <div class="contente">
-                        <h2>New to Netflix? <a href="/templates/mahome.html">Sign Up now.</a></h2>
-                        <h2>This page is protected by Google reCAPTCHA to ensure you're not a bot. Learn more.</h2>
-                  </div>
-            </div>
-      </div>  
+  <div class="header">
+    <nav>
+      <img src="{{ url_for('static', filename='images/netflix-logo 2.png') }}" alt="logo" class="logo"> 
+    </nav>
+    <div class="kuingia">
+      <h1>Sign In</h1>
+
+      {% with messages = get_flashed_messages() %}
+        {% if messages %}
+          <div class="flash-messages">
+            <ul>
+              {% for message in messages %}
+                <li>{{ message }}</li>
+              {% endfor %}
+            </ul>
+          </div>
+        {% endif %}
+      {% endwith %}
+
+      <form method="POST" action="{{ url_for('register') }}">
+        <input type="email" name="username" placeholder="Email or Phone Number" required>
+        <input type="password" name="password" placeholder="Password" required>
+        <input type="submit" value="Sign In">
+        <input type="checkbox" name="checkbox" id="checkbox">
+        <label for="checkbox">Remember Me</label>
+        <a href="">Need Help?</a>
+      </form>
+
+      <div class="contente">
+        <h2>New to Netflix? <a href="{{ url_for('home') }}">Sign Up now.</a></h2>
+        <h2>This page is protected by Google reCAPTCHA to ensure you're not a bot. Learn more.</h2>
+      </div>
+    </div>
+  </div>  
 </body>
 </html>
