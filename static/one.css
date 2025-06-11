@@ -1,0 +1,137 @@
+body {
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: white;
+      color: #000;
+    }
+    
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      border-bottom: 1px solid #e6e6e6;
+    }
+    
+    .logo {
+      height: 36px;
+    }
+    
+    .sign-out {
+      font-weight: bold;
+      color: #333;
+      text-decoration: none;
+    }
+    
+    div {
+      padding: 2rem;
+      text-align: center;
+    }
+    
+    .step {
+      font-size: 1rem;
+      color: #555;
+      margin-bottom: 0.5rem;
+    }
+    
+    .step span {
+      font-weight: bold;
+    }
+    
+    h1 {
+      font-size: 1.8rem;
+      margin-bottom: 2rem;
+    }
+    
+    .plans {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+      text-align: left;
+    }
+    
+    .plan {
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      padding: 1.2rem;
+      position: relative;
+      background: linear-gradient(to bottom right, #f2f2f2, #fff);
+      cursor: pointer;
+    }
+    
+    .title {
+      font-size: 1.1rem;
+      font-weight: bold;
+      margin-bottom: 1rem;
+      color: #222;
+    }
+    
+    .title span {
+      display: block;
+      font-size: 0.9rem;
+      color: #555;
+      margin-top: 0.3rem;
+    }
+    
+    .plan ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    
+    .plan li {
+      margin: 0.6rem 0;
+      font-size: 0.95rem;
+    }
+    
+    .plan li span {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 0.2rem;
+      color: #333;
+    }
+    
+    .badge {
+      position: absolute;
+      top: -12px;
+      left: -1px;
+      background-color: #e50914;
+      color: white;
+      padding: 0.3rem 0.7rem;
+      font-size: 0.75rem;
+      font-weight: bold;
+      border-radius: 5px;
+    }
+    
+    .selected {
+      /* border: 2px solid #e50914; */
+      /* background: linear-gradient(to bottom right, #fdd, #fff); */
+    }
+    
+    .checkmark {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      font-size: 1.5rem;
+      color: #e50914;
+      font-weight: bold;
+    }
+    .plan:hover{
+      border: 2px solid #e50914;
+      background: linear-gradient(to bottom right, #fdd, #fff);
+    }
+    .start-button{
+      background-color: #e50914;
+      color: white;
+      border: none;
+      padding: 15px 0;
+      width: 100%;
+      font-size: 18px;
+      font-weight: bold;
+      cursor: pointer;
+      border-radius: 4px;
+}
+.start-button:hover{
+      background-color: #f40612;
+}
