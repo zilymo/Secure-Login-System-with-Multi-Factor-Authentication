@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Set up your credit or debit card</title>
+  <link rel="stylesheet" href="pay.css">
+</head>
+<body>
+  <div class="header">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg" alt="Netflix" class="logo">
+    <a href="#" class="signin">Sign In</a>
+   </div> 
+   <div class="container">    
+     <a href="#">Change payment method</a>
+     <h1>Set up your credit or debit card</h1>
+
+    <div class="logos">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/0/04/Visa.svg" alt="Visa" class="card-logo">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" alt="Mastercard" class="card-logo">
+    </div>
+
+    <form>
+      <input type="text" placeholder="Card number" required>
+      <div class="row">
+        <input type="text" placeholder="Expiration date" required>
+        <input type="text" placeholder="CVV" required>
+      </div>
+      <input type="text" placeholder="Name on card" required>
+      
+      <div class="price-box">
+        <span><strong>KES 1,100/month</strong></span><br>
+        <p>Premium</p>
+        <a href="#">Change</a>
+      </div>
+
+      <p class="note">
+        Your payments will be processed internationally. Additional bank fees may apply.
+      </p>
+
+      <p class="terms">
+        By checking the checkbox below, you agree to our <a href="#">Terms of Use</a>,
+        <a href="#">Privacy Statement</a>, and that you are over 18. Netflix will automatically
+        continue your membership and charge the membership fee (currently KES 1,100/month) to your payment method until you cancel.
+        You may cancel at anytime to avoid future charges
+      </p>
+
+      <div class="checkbox-container">
+            <input type="checkbox" id="agree">
+            <label for="agree">I agree.</label>
+      </div>
+
+      <button class="start-button">Start Membership</button>
+
+      <p class="captcha-note">
+            This page is protected by Google reCAPTCHA to ensure you're not a bot.
+            <a href="">Learn more</a>
+      </p>
+    </form>
+  </div>
+</body>
+</html>
