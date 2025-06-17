@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Netflix Sign Up</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='register.css') }}">
+  <link rel="icon" href="{{ url_for('static', filename='images/netflixtoptoplogo.jpeg') }}">
+</head>
+<body>
+  <header>
+    <img src="{{ url_for('static', filename='images/netflix-logo_2-removebg-preview.png') }}" alt="Netflix Logo" class="logo">
+    <a href="{{ url_for('home') }}" class="signin-link">Sign In</a>
+  </header>
+
+  <div class="container">
+    <div class="main">
+      <div class="form-box">
+        <h1>Create a password to start your membership</h1>
+        <p class="subtitle">Just a few more steps and you're done!<br>We hate paperwork, too.</p>
+
+        {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            <div class="flash-messages">
+              <ul>
+                {% for message in messages %}
+                  <li>{{ message }}</li>
+                {% endfor %}
+              </ul>
+            </div>
+          {% endif %}
+        {% endwith %}
+
+        <form method="POST" action="{{ url_for('register') }}">
+          <input type="email" name="username" placeholder="Email" required>
+          <input type="password" name="password" placeholder="Add a password" required>
+
+          <label class="checkbox">
+            <input type="checkbox" name="special_offers">
+            Please do not email me Netflix special offers.
+          </label>
+
+          <button type="submit">Next</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

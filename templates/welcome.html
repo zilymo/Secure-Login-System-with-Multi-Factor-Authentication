@@ -3,16 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <title>Set up your credit or debit card</title>
-  <link rel="stylesheet" href="pay.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='pay.css') }}">
 </head>
 <body>
   <div class="header">
     <img src="https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg" alt="Netflix" class="logo">
-    <a href="#" class="signin">Sign In</a>
-   </div> 
-   <div class="container">    
-     <a href="#">Change payment method</a>
-     <h1>Set up your credit or debit card</h1>
+    <a href="/logout" class="signin">Logout</a>
+  </div> 
+  <div class="container">    
+    <h2>Welcome, {{ username }}!</h2>
+
+    <a href="#">Change payment method</a>
+    <h1>Set up your credit or debit card</h1>
 
     <div class="logos">
       <img src="https://upload.wikimedia.org/wikipedia/commons/0/04/Visa.svg" alt="Visa" class="card-logo">
@@ -45,15 +47,15 @@
       </p>
 
       <div class="checkbox-container">
-            <input type="checkbox" id="agree">
-            <label for="agree">I agree.</label>
+        <input type="checkbox" id="agree">
+        <label for="agree">I agree.</label>
       </div>
 
       <button class="start-button">Start Membership</button>
 
       <p class="captcha-note">
-            This page is protected by Google reCAPTCHA to ensure you're not a bot.
-            <a href="">Learn more</a>
+        This page is protected by Google reCAPTCHA to ensure you're not a bot.
+        <a href="">Learn more</a>
       </p>
     </form>
   </div>

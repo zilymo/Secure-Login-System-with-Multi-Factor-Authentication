@@ -13,17 +13,19 @@
           <img src="{{ url_for('static', filename='images/netflix-logo_2-removebg-preview.png') }}" alt="logo" class="logo"> 
           <div>
                <button class="language">English</button>
-               <!-- Link to Flask's register route -->
-               <button><a href="{{ url_for('register') }}" style="text-decoration: none; color: white;">Sign In</a></button>
+               <!-- Correct link to Flask's login route -->
+               <button><a href="{{ url_for('login') }}" style="text-decoration: none; color: white;">Sign In</a></button>
           </div> 
       </nav>
       <div class="header-content">
             <h1>Unlimited movies, TV shows and more.</h1>
             <h3>Watch anywhere. Cancel anytime.</h3>
             <p>Ready to watch? Enter your email to create or restart your membership.</p>
-            <form method="POST" class="email-signup">
+            
+            <!-- Correct form action to go to register page -->
+            <form method="GET" action="{{ url_for('register') }}" class="email-signup">
                   <input type="email" name="email" placeholder="Email address" required>
-                  <button type="submit"><a href="/templates/one.html">Get Started</a></button>
+                  <button type="submit">Get Started</button>
             </form>
       </div>
    </div>
