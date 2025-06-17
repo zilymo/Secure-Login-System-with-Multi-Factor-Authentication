@@ -1,11 +1,18 @@
 from flask import Flask, render_template, request, redirect, flash, url_for, session
+import mysql.connector
 import bcrypt
 import re
-import os
 
 app = Flask(__name__)
 app.secret_key = 'your_secret_key'
-DATA_FILE = 'users.txt'
+
+# MySQL Configuration
+db = mysql.connector.connect(
+    host="localhost",   # or your mysql server host
+    user="root",        # your mysql username
+    password="your_mysql_password",  # your mysql password
+    database="netflix_db"
+)
 
 # Password strength check
 def check_password_strength(password):
@@ -21,30 +28,10 @@ def check_password_strength(password):
         return "Password should have at least 1 special character."
     return "OK"
 
-# Check if user exists
-def user_exists(username):
-    if not os.path.exists(DATA_FILE):
-        return False
-    with open(DATA_FILE, 'r') as file:
-        for line in file:
-            if line.split(',')[0] == username:
-                return True
-    return False
-
-# Get stored hashed password
-def get_hashed_password(username):
-    with open(DATA_FILE, 'r') as file:
-        for line in file:
-            stored_username, stored_hash = line.strip().split(',')
-            if stored_username == username:
-                return stored_hash
-    return None
-
 @app.route('/')
 def home():
     return render_template('index.html')
 
-# Registration Route
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
@@ -56,43 +43,50 @@ def register():
             flash(strength_check)
             return redirect(url_for('register'))
 
-        if user_exists(username):
+        cursor = db.cursor()
+        cursor.execute("SELECT * FROM users WHERE username = %s", (username,))
+        existing_user = cursor.fetchone()
+
+        if existing_user:
             flash("Username already exists.")
             return redirect(url_for('register'))
 
         hashed_pw = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
-
-        with open(DATA_FILE, 'a') as f:
-            f.write(f"{username},{hashed_pw.decode('utf-8')}\n")
+        cursor.execute("INSERT INTO users (username, password) VALUES (%s, %s)", (username, hashed_pw.decode('utf-8')))
+        db.commit()
+        cursor.close()
 
         flash("Registration successful. Please sign in.")
         return redirect(url_for('login'))
 
     return render_template('new.html')
 
-# Login Route
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
 
-        if not user_exists(username):
-            flash("User not found.")
-            return redirect(url_for('login'))
+        cursor = db.cursor()
+        cursor.execute("SELECT password FROM users WHERE username = %s", (username,))
+        result = cursor.fetchone()
 
-        stored_hash = get_hashed_password(username)
-        if stored_hash and bcrypt.checkpw(password.encode('utf-8'), stored_hash.encode('utf-8')):
-            session['username'] = username  # Store user in session
-            flash(f"Welcome {username}!")
-            return redirect(url_for('welcome'))
+        if result:
+            stored_hash = result[0]
+            if bcrypt.checkpw(password.encode('utf-8'), stored_hash.encode('utf-8')):
+                session['username'] = username
+                flash(f"Welcome {username}!")
+                return redirect(url_for('welcome'))
+            else:
+                flash("Incorrect password.")
         else:
-            flash("Incorrect password.")
-            return redirect(url_for('login'))
+            flash("User not found.")
+
+        cursor.close()
+        return redirect(url_for('login'))
 
     return render_template('login.html')
 
-# Welcome Route - protected
 @app.route('/welcome')
 def welcome():
     if 'username' not in session:
@@ -100,7 +94,6 @@ def welcome():
         return redirect(url_for('login'))
     return render_template('welcome.html', username=session['username'])
 
-# Logout Route
 @app.route('/logout')
 def logout():
     session.pop('username', None)
