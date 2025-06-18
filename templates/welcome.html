@@ -14,7 +14,7 @@
     <h2>Welcome, {{ username }}!</h2>
 
     <a href="#">Change payment method</a>
-    <h1>Set up your credit or debit card</h1>
+    <h1>Set up your credit or debit card for {{ plan }} plan</h1>
 
     <div class="logos">
       <img src="https://upload.wikimedia.org/wikipedia/commons/0/04/Visa.svg" alt="Visa" class="card-logo">
@@ -30,8 +30,8 @@
       <input type="text" placeholder="Name on card" required>
       
       <div class="price-box">
-        <span><strong>KES 1,100/month</strong></span><br>
-        <p>Premium</p>
+        <span><strong>KES {{ price }}/month</strong></span><br>
+        <p>{{ plan }}</p>
         <a href="#">Change</a>
       </div>
 
@@ -42,7 +42,7 @@
       <p class="terms">
         By checking the checkbox below, you agree to our <a href="#">Terms of Use</a>,
         <a href="#">Privacy Statement</a>, and that you are over 18. Netflix will automatically
-        continue your membership and charge the membership fee (currently KES 1,100/month) to your payment method until you cancel.
+        continue your membership and charge the membership fee (currently KES {{ price }}/month) to your payment method until you cancel.
         You may cancel at anytime to avoid future charges
       </p>
 
