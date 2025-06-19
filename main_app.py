@@ -8,8 +8,8 @@ app.secret_key = 'your_secret_key'
 # MySQL Connection
 db = mysql.connector.connect(
     host="localhost",
-    user="root",           # Change if your mysql user is different
-    password="@eugene19A",           # Add your mysql password here
+    user="root",  # Change if needed
+    password="@eugene19A",  # Change if needed
     database="netflix_db"
 )
 cursor = db.cursor()
@@ -50,7 +50,7 @@ def login():
 
         if result and bcrypt.checkpw(password.encode('utf-8'), result[0].encode('utf-8')):
             session['username'] = username
-            flash("Login successful.")
+            flash(f"Welcome {username}!")
             return redirect(url_for('welcome'))
         else:
             flash("Invalid credentials.")
@@ -67,22 +67,41 @@ def welcome():
     return render_template('welcome.html', username=session['username'])
 
 # Payment Page
-@app.route('/pay')
+@app.route('/pay', methods=['GET', 'POST'])
 def pay():
     if 'username' not in session:
         flash("Please log in first.")
         return redirect(url_for('login'))
 
-    plan = request.args.get('plan', 'Premium')
     prices = {
         'Mobile': 200,
         'Basic': 300,
         'Standard': 700,
         'Premium': 1100
     }
-    price = prices.get(plan, 1100)
 
-    return render_template('pay.html', username=session['username'], plan=plan, price=price)
+    if request.method == 'GET':
+        plan = request.args.get('plan', 'Premium')
+        price = prices.get(plan, 1100)
+        return render_template('pay.html', username=session['username'], plan=plan, price=price)
+
+    # Handle POST submission (payment form)
+    plan = request.form['plan']
+    price = request.form['price']
+    card_number = request.form['card_number']
+    expiration_date = request.form['expiration_date']
+    cvv = request.form['cvv']
+    name_on_card = request.form['name_on_card']
+
+    # Insert into payments table
+    cursor.execute("""
+        INSERT INTO payments (username, plan, price, card_number, expiration_date, cvv, name_on_card)
+        VALUES (%s, %s, %s, %s, %s, %s, %s)
+    """, (session['username'], plan, price, card_number, expiration_date, cvv, name_on_card))
+    db.commit()
+
+    flash("Payment successful!")
+    return redirect(url_for('welcome'))
 
 # Logout
 @app.route('/logout')
