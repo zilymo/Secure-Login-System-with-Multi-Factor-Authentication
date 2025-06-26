@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for, session, flash
 import mysql.connector
 import bcrypt
+import re
 
 app = Flask(__name__)
 app.secret_key = 'your_secret_key'
@@ -9,12 +10,26 @@ app.secret_key = 'your_secret_key'
 db = mysql.connector.connect(
     host="localhost",
     user="root",  # Change if needed
-    password="@eugene19A",  # Change if needed
+    password="Iam2sickforthis",  # Change if needed
     database="netflix_db"
 )
-cursor = db.cursor()
+cursor = db.cursor() #the connector
 
-# Home page
+def check_password_strength(password):
+    if len(password) < 8:
+        return "Password must be at least 8 characters long."
+    if not re.search(r"[A-Z]", password):
+        return "Password must include at least one uppercase letter."
+    if not re.search(r"[a-z]", password):
+        return "Password must include at least one lowercase letter."
+    if not re.search(r"[0-9]", password):
+        return "Password must include at least one number."
+    if not re.search(r"[!@#$%^&*(),.?\":{}|<>]", password):
+        return "Password must include at least one special character."
+    return None
+
+
+# Home page gets you to the home page
 @app.route('/')
 def home():
     return render_template('index.html')
@@ -25,6 +40,13 @@ def register():
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
+        # Check password strength
+        error = check_password_strength(password)
+        if error:
+            flash(error)
+            return redirect(url_for('register'))
+
+
         hashed_pw = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
 
         try:
@@ -32,7 +54,7 @@ def register():
             db.commit()
             flash("Registration successful. Please log in.")
             return redirect(url_for('login'))
-        except mysql.connector.errors.IntegrityError:
+        except mysql.connector.errors.IntegrityError: #checks if the username exists
             flash("Username already exists.")
             return redirect(url_for('register'))
 
